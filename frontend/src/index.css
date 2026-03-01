@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* InternBridge Blue-Indigo Theme */
+    --background: 0.98 0.005 240;
+    --foreground: 0.15 0.02 250;
+    --card: 1 0 0;
+    --card-foreground: 0.15 0.02 250;
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0.02 250;
+    --primary: 0.55 0.22 264;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.94 0.03 250;
+    --secondary-foreground: 0.25 0.05 260;
+    --muted: 0.95 0.01 240;
+    --muted-foreground: 0.5 0.04 255;
+    --accent: 0.92 0.05 260;
+    --accent-foreground: 0.3 0.1 265;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 0.88 0.02 250;
+    --input: 0.88 0.02 250;
+    --ring: 0.55 0.22 264;
+
+    /* Status colors */
+    --success: 0.6 0.17 155;
+    --warning: 0.72 0.18 75;
+    --danger: 0.58 0.22 27;
+    --info: 0.55 0.22 264;
+
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar: 0.97 0.01 250;
+    --sidebar-foreground: 0.15 0.02 250;
+    --sidebar-primary: 0.55 0.22 264;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.92 0.05 260;
+    --sidebar-accent-foreground: 0.3 0.1 265;
+    --sidebar-border: 0.88 0.02 250;
+    --sidebar-ring: 0.55 0.22 264;
+  }
+
+  .dark {
+    --background: 0.12 0.02 260;
+    --foreground: 0.95 0.01 240;
+    --card: 0.17 0.025 260;
+    --card-foreground: 0.95 0.01 240;
+    --popover: 0.2 0.03 260;
+    --popover-foreground: 0.95 0.01 240;
+    --primary: 0.62 0.22 264;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.22 0.04 260;
+    --secondary-foreground: 0.9 0.01 240;
+    --muted: 0.22 0.03 260;
+    --muted-foreground: 0.65 0.04 255;
+    --accent: 0.28 0.06 265;
+    --accent-foreground: 0.9 0.01 240;
+    --destructive: 0.704 0.191 22.216;
+    --destructive-foreground: 0.95 0.01 240;
+    --border: 1 0 0 / 10%;
+    --input: 1 0 0 / 15%;
+    --ring: 0.62 0.22 264;
+    --sidebar: 0.17 0.025 260;
+    --sidebar-foreground: 0.95 0.01 240;
+    --sidebar-primary: 0.62 0.22 264;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.28 0.06 265;
+    --sidebar-accent-foreground: 0.9 0.01 240;
+    --sidebar-border: 1 0 0 / 10%;
+    --sidebar-ring: 0.62 0.22 264;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-hero {
+    background: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #3B82F6 0%, #6366F1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .badge-verified {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200;
+  }
+
+  .badge-pending {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200;
+  }
+
+  .badge-rejected {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700 border border-red-200;
+  }
+
+  .badge-moreinfo {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200;
+  }
+
+  .status-applied {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700;
+  }
+
+  .status-under-review {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700;
+  }
+
+  .status-accepted {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700;
+  }
+
+  .status-rejected {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-700;
+  }
+
+  .sidebar-nav-item {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer;
+  }
+
+  .sidebar-nav-item-active {
+    @apply bg-blue-50 text-blue-700 border border-blue-100;
+  }
+
+  .sidebar-nav-item-inactive {
+    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "kind": "build_request",
+  "title": "InternBridge – Skill-Based Internship Platform (Full SPA)",
+  "projectName": "InternBridge",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Build a fully responsive single-page React application called 'InternBridge' with state-based navigation (no router library). Use a global AuthContext to manage the currently logged-in user (role: student | recruiter | admin). Persist auth state in localStorage under the key `internbridge_currentUser`. Apply a consistent blue-to-indigo gradient color scheme with Tailwind CSS throughout.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Use React Router-style navigation via state (no actual router needed). Create a context for global auth state."
+        ]
+      },
+      "acceptanceCriteria": [
+        "A single React app renders all pages via useState-controlled page routing.",
+        "AuthContext is accessible to all components and reflects the current user role.",
+        "Refreshing the page restores the logged-in user from localStorage.",
+        "Blue (#3B82F6) to Indigo (#6366F1) gradient is used as the primary color theme."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement a responsive Navbar with links: Home, Login, Register. On mobile, collapse links behind a hamburger menu. When a user is logged in, show their name/role and a Logout button that clears `internbridge_currentUser` and redirects to the Home page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Navbar with links: Home, Login, Register",
+          "Hamburger menu on mobile"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navbar renders on all pages.",
+        "Hamburger icon appears on screens narrower than md breakpoint and toggles the nav links.",
+        "Logged-in user's name and role are displayed.",
+        "Logout clears auth state and returns user to Home."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build the Home page with: (1) a hero section containing the tagline 'Bridge the Gap Between Skills and Opportunities' and two CTA buttons — 'Find Internships' (navigates to Search page) and 'Hire Talent' (navigates to Register as Recruiter); (2) a Features section highlighting platform benefits (skill verification, smart matching, easy applications, admin oversight); styled with the blue-to-indigo gradient hero background.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Hero section with tagline: 'Bridge the Gap Between Skills and Opportunities'",
+          "Two CTA buttons: 'Find Internships' (for students) and 'Hire Talent' (for recruiters)",
+          "Features section highlighting platform benefits"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero section displays the exact tagline and both CTA buttons.",
+        "'Find Internships' navigates to the Search Internships page.",
+        "'Hire Talent' navigates to the Register page pre-selected on the Recruiter tab.",
+        "Features section shows at least 4 benefit cards.",
+        "Hero background uses the blue-to-indigo gradient."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Build the Login page with two tabs: 'Student / Recruiter Login' (email + password fields, checks localStorage `internbridge_students` and `internbridge_recruiters` for a matching user) and 'Admin Login' (username + password, hardcoded credentials admin/admin). On successful login, write to `internbridge_currentUser` and redirect to the appropriate dashboard based on role. Show inline error messages for invalid credentials.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Two tabs: 'Student/Recruiter Login' and 'Admin Login'",
+          "Admin Login: Username + Password fields (admin/admin hardcoded)",
+          "On login, check localStorage for matching user",
+          "Redirect to appropriate dashboard based on role"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Two tabs switch between Student/Recruiter login and Admin login forms.",
+        "Successful student login saves currentUser with role 'student' and redirects to /student-dashboard.",
+        "Successful recruiter login saves currentUser with role 'recruiter' and redirects to /recruiter-dashboard.",
+        "Admin login with admin/admin saves currentUser with role 'admin' and redirects to /admin-dashboard.",
+        "Wrong credentials display a visible error message without page reload."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Build the Register page with two tabs: Student and Recruiter. Student fields: Name, DOB (date), Gender (radio: Male/Female/Other), Email, Mobile, Password, ID Proof (select: Aadhar/PAN/Voter ID), Skills (checkboxes: EXCEL, Power BI, SQL, Python), Photo (file → base64), Resume (file → base64). On submit, append to `internbridge_students` array in localStorage with `verified: false, verificationStatus: 'pending', assessments: [], certificates: []`. Recruiter fields: Name, Email, Phone, Password, Company Name, Owner Name, Owner ID Proof (select), DIN Number, CIN Number, Address (textarea). On submit, append to `internbridge_recruiters` with `verified: false, verificationStatus: 'pending'`. Both forms validate required fields and show inline errors. After registration, redirect to the login page.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Role selector: Student or Recruiter (toggle/tabs)",
+          "On submit: save to localStorage under `internbridge_students` array",
+          "On submit: save to localStorage under `internbridge_recruiters` array"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Student and Recruiter registration tabs are independently functional.",
+        "All listed fields are present with correct input types.",
+        "Photo and Resume files are converted to base64 before storage.",
+        "Validation prevents submission with missing required fields.",
+        "New student record includes verified: false, verificationStatus: 'pending', assessments: [], certificates: [].",
+        "New recruiter record includes verified: false, verificationStatus: 'pending'.",
+        "Redirect to Login page after successful registration."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Build the Student Dashboard as a protected route (redirect to Login if not authenticated as student). Implement sidebar navigation (collapses to tabs on mobile) with these sections: (1) Profile – display all stored profile fields, photo, and an Edit button to update name/mobile/skills; (2) Skills – list skills with a badge: yellow ⚠ Unverified or green ✓ Verified based on `verificationStatus`; (3) Documents – show resume filename, ID proof, and a certificate upload (file → base64 appended to `certificates[]`); (4) Skill Assessment – button/link to navigate to the Assessment page; (5) Search Internships – button/link to navigate to the Search page; (6) My Applications – list of the student's applications fetched from `internbridge_applications` with status badges.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Protected route — only for logged-in students.",
+          "Profile",
+          "Skills",
+          "Documents",
+          "Skill Assessment",
+          "Search Internships",
+          "My Applications"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated access redirects to Login.",
+        "Sidebar renders on desktop; collapses to tab bar on mobile.",
+        "Profile section shows photo and all student fields with working Edit mode.",
+        "Skills section shows correct badge per verification status.",
+        "Certificate upload converts file to base64 and appends to student's certificates array in localStorage.",
+        "My Applications shows all applications for the current student with colored status badges."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Build the Recruiter Dashboard as a protected route (redirect to Login if not authenticated as recruiter). Sidebar navigation with sections: (1) Company Profile – display stored company info; (2) Verification Status – show 'Verified Employer' badge (gold/green) if `verified: true`, else 'Pending Verification' badge; (3) Post Internship – form with Company Name (auto-filled), Designation, Duration, Stipend, Work Type (select: Offline/Online/Hybrid), Skills Required (checkboxes), Description; saves new entry to `internbridge_internships` in localStorage; (4) My Internship Postings – list of internships posted by this recruiter; (5) View Applicants / Application Management – for each internship, list applicants from `internbridge_applications` and allow changing status through Applied → Under Review → Accepted/Rejected via a dropdown or buttons.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Protected route — only for logged-in recruiters.",
+          "Post Internship",
+          "My Internship Postings",
+          "View Applicants",
+          "Application Management"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Unauthenticated access redirects to Login.",
+        "Post Internship form saves correctly to localStorage with recruiterId and postedDate.",
+        "My Internship Postings lists only this recruiter's internships.",
+        "Application Management lists applicants per internship with current status.",
+        "Status changes persist immediately to localStorage."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Build the Admin Dashboard as a protected route (redirect to Login if not authenticated as admin). Implement three tabs: (1) Students – table with Name, Email, Skills, Verification Status, and action buttons: Verify (sets verified:true, verificationStatus:'verified'), Reject (sets verificationStatus:'rejected'), Request More Info (sets verificationStatus:'more_info'); (2) Recruiters – table with Company Name, Name, Email, Verification Status and same action buttons; (3) Documents – list all uploaded documents (photos, resumes, certificates) from students and recruiters with document status (Pending/Approved/Rejected/Need More Info) and action buttons to change each document's status. All state changes persist to localStorage immediately.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Protected route — only for admin.",
+          "Students Tab",
+          "Recruiters Tab",
+          "Documents Tab",
+          "Verify",
+          "Reject",
+          "Request More Info"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin-only access; other roles are redirected.",
+        "Students tab shows all students with correct current verification status.",
+        "Verify/Reject/Request More Info buttons update the student/recruiter record in localStorage.",
+        "Recruiters tab mirrors Student tab functionality for recruiter records.",
+        "Documents tab lists all file uploads with status controls."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Build the Search Internships page (accessible to all, but Apply button only shown to logged-in students). Display all internships from `internbridge_internships`. Include a search bar that filters in real-time by designation, company name, skills, and description. Each internship card shows: Company Name, Designation, Duration, Stipend, Work Type badge, Skills tags, and an Apply button. On Apply, create a new record in `internbridge_applications`: { id, internshipId, studentId, studentName, companyName, designation, appliedDate, status: 'applied' }. Show a toast/confirmation after applying and prevent duplicate applications.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Search bar at top (searches by designation, company, skills, description)",
+          "Show ALL internships from localStorage dynamically filtered",
+          "'Apply' button (only for logged-in students)",
+          "On apply: create application record in localStorage `internbridge_applications`"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All internships from localStorage are displayed by default.",
+        "Search bar filters cards in real-time across designation, company, skills, and description fields.",
+        "Apply button is visible only to authenticated students.",
+        "Applying creates a correct record in `internbridge_applications`.",
+        "Duplicate application attempts show an error or are blocked.",
+        "Work Type and skill tags render as styled badges/pills."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Build the Assessment page. Display a skill selector (Excel, SQL, Power BI, Python). For the selected skill, show 5 hardcoded multiple-choice questions. On submit, calculate the score (X/5), save the assessment result to the current student's `assessments` array in `internbridge_students` localStorage (format: { testName, score, date }), and display the result with Test Name, Score, and Date Taken. Allow retaking the assessment.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Form with: Name/Test Name (select: EXCEL, SQL, POWER BI, Python)",
+          "5 multiple-choice questions per skill (hardcode questions for each skill)",
+          "Submit button generates Score (X/5)",
+          "Save assessment result to student's profile in localStorage"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each of the 4 skills (Excel, SQL, Power BI, Python) has exactly 5 distinct MCQ questions.",
+        "Score is calculated correctly out of 5.",
+        "Result is saved to the logged-in student's assessments array in localStorage.",
+        "Result summary (test name, score, date) is displayed after submission.",
+        "User can retake a different or same assessment."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Build the Applications page. For logged-in students, display all their applications from `internbridge_applications` showing: Internship Title, Company Name, Applied Date, and a colored status badge (Applied – blue, Under Review – yellow, Accepted – green, Rejected – red). For logged-in recruiters, show the same application management view as in the Recruiter Dashboard (list applicants per internship with status change controls).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "For Students: List of all their applications",
+          "Status badge: Applied (blue), Under Review (yellow), Accepted (green), Rejected (red)",
+          "For Recruiters: Same as Application Management in dashboard"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Student view lists only the current student's applications.",
+        "Status badges use the correct specified colors.",
+        "Recruiter view groups applications by internship with status update controls.",
+        "Status changes by recruiter persist to localStorage."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "On first load (when localStorage keys are absent), seed the following data: 2 sample students (one with verificationStatus:'verified', one 'pending'), 2 sample recruiters (one verified, one pending), 3 sample internships linked to the verified recruiter, and at least 2 sample applications. Data must conform to the defined data models.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Pre-populate localStorage with sample data on first load",
+          "2 sample students (one verified, one pending)",
+          "2 sample recruiters (one verified, one pending)",
+          "3 sample internships from verified recruiter",
+          "Sample applications"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first load with empty localStorage, all four keys are populated with seed data.",
+        "Seed is not re-applied if keys already exist.",
+        "Seed students include one with verified:true/verificationStatus:'verified' and one with verificationStatus:'pending'.",
+        "Seed internships are linked to the verified recruiter's id.",
+        "Sample applications reference valid seed student and internship ids."
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Implement reusable UI components: (1) Badge – renders Verified ✓ (green), Pending ⏳ (yellow), Rejected ✗ (red), More Info (blue) variants; (2) StatusPill – for application statuses with the specified colors; (3) Toast notification that appears at bottom-right for actions like Apply, Save, Verify, Reject; (4) Confirmation Modal for destructive actions; (5) InternshipCard for the Search page. Apply mobile-first Tailwind CSS and ensure cards stack vertically on mobile and form a grid on desktop.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Badge components (Verified ✓, Pending ⏳, Rejected ✗)",
+          "Status pills for applications",
+          "Modal for confirmations",
+          "Toast notifications for actions",
+          "Stack cards vertically on mobile"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Badge component renders the correct icon, text, and color for each variant.",
+        "StatusPill applies the four specified application status colors.",
+        "Toast appears and auto-dismisses after ~3 seconds.",
+        "Confirmation Modal is reusable and accepts a message and onConfirm callback.",
+        "InternshipCard is responsive: single column on mobile, grid on md+ screens."
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Apply a polished, professional visual theme: blue (#3B82F6) to indigo (#6366F1) gradient for hero and primary actions; light gray (#F9FAFB) backgrounds for dashboard content areas; success green (#10B981) for verified states; warning yellow (#F59E0B) for pending states; danger red (#EF4444) for rejected states. Use clean typography with clear hierarchy (large headings in hero, medium in section titles, small in card metadata). Ensure the overall layout feels modern and trustworthy, appropriate for a professional internship platform.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Primary: Blue (#3B82F6) to Indigo (#6366F1) gradient",
+          "Success/Verified: Green (#10B981)",
+          "Warning/Pending: Yellow (#F59E0B)",
+          "Danger/Rejected: Red (#EF4444)",
+          "Background: Light gray (#F9FAFB)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero section has a blue-to-indigo gradient background.",
+        "Dashboard backgrounds use #F9FAFB.",
+        "All verified badges are green, pending are yellow, rejected are red.",
+        "Typography hierarchy is visually clear on all screen sizes.",
+        "Overall design looks professional and consistent across all pages."
+      ]
+    }
+  ],
+  "constraints": [
+    "No backend is required — all data persistence uses localStorage only.",
+    "All navigation must be implemented via React useState (no router library).",
+    "File uploads (photo, resume, certificates) must be converted to base64 strings for localStorage storage.",
+    "Admin credentials are hardcoded as username: 'admin', password: 'admin'.",
+    "Seed data must only be written when the localStorage keys are absent (first load).",
+    "Do not edit files under frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, or frontend/src/components/ui."
+  ],
+  "nonGoals": [
+    "No backend Motoko canister logic is required for this feature set.",
+    "No real authentication or JWT tokens — localStorage-only session management.",
+    "No actual file storage server — files are base64-encoded in localStorage.",
+    "No email notifications or SMS.",
+    "No real-time updates or WebSockets.",
+    "No external API integrations.",
+    "No actual payment processing."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Professional hero background illustration showing a bridge connecting graduating students to office buildings, abstract flat style, blue and indigo tones (hero-bg.dim_1440x600.png)",
+      "InternBridge logo mark — abstract bridge icon combined with a graduation cap, clean minimal style, white on transparent background (logo-icon.dim_128x128.png)"
+    ],
+    "edits": []
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-03-01T11:24:18.866Z",
+  "summary": "The diff implements a comprehensive full-stack SPA matching most requirements. Core features including AuthContext, Navbar, Home, Login, Register, StudentDashboard, RecruiterDashboard, AdminDashboard, SearchInternships, Assessment, Applications pages, seed data, reusable UI components (Badge/VerificationBadge, StatusPill, Toast, ConfirmationModal, InternshipCard), and the blue-to-indigo visual theme are all present. Several files are truncated or omitted, limiting full verification of some acceptance criteria. The required image assets are not present in the diff.",
+  "missing_requirements": [
+    {
+      "requirement": "Professional hero background illustration (hero-bg.dim_1440x600.png) and InternBridge logo mark (logo-icon.dim_128x128.png) image assets must be included",
+      "reason": "The build request specifies two required images. Neither image file appears in the diff summary. The Home page uses CSS gradients and SVG icons instead.",
+      "evidence": [
+        "frontend/src/pages/Home.tsx"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Student registration with all listed fields (Name, DOB, Gender radio, Email, Mobile, Password, ID Proof select, Skills checkboxes, Photo file, Resume file) and Recruiter registration with all listed fields",
+      "reason": "The Register page file is not included in the shown diff (omitted due to file limits), so it cannot be confirmed whether all required fields with correct input types are implemented.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Student Dashboard with sidebar sections: Profile with Edit mode, Skills with verification badges, Documents with certificate upload, Skill Assessment link, Search Internships link, My Applications",
+      "reason": "The StudentDashboard.tsx file is not included in the shown diff (omitted due to file limits), so its full implementation cannot be verified.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Seed data on first load: 2 sample students (one verified, one pending), 2 sample recruiters (one verified, one pending), 3 sample internships linked to verified recruiter, at least 2 sample applications",
+      "reason": "The seedData utility file is referenced throughout the codebase but is not included in the shown diff (omitted due to file limits), so the seed content and data model conformance cannot be verified.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Stats section on the Home page showing numeric platform statistics: 500+ Active Internships, 2000+ Students Placed, 150+ Verified Companies, 95% Satisfaction Rate",
+      "reason": "The build request for the Home page (REQ-3) only specifies a hero section and a features section highlighting platform benefits. A stats/numbers section was not requested.",
+      "evidence": [
+        "frontend/src/pages/Home.tsx"
+      ]
+    },
+    {
+      "description": "Stats overview cards on the Admin Dashboard showing Total Students, Verified Students, Total Recruiters, Verified Recruiters counts",
+      "reason": "REQ-8 only specifies three tabs (Students, Recruiters, Documents) with tables and action buttons. A stats overview card grid at the top of the Admin Dashboard was not requested.",
+      "evidence": [
+        "frontend/src/pages/AdminDashboard.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.63,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/ConfirmationModal.tsx",
+    "frontend/src/components/InternshipCard.tsx",
+    "frontend/src/components/Navbar.tsx",
+    "frontend/src/components/StatusPill.tsx",
+    "frontend/src/components/Toast.tsx",
+    "frontend/src/components/VerificationBadge.tsx",
+    "frontend/src/contexts/AuthContext.tsx",
+    "frontend/src/data/assessmentQuestions.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/AdminDashboard.tsx",
+    "frontend/src/pages/Applications.tsx",
+    "frontend/src/pages/Assessment.tsx",
+    "frontend/src/pages/Home.tsx",
+    "frontend/src/pages/Login.tsx",
+    "frontend/src/pages/RecruiterDashboard.tsx",
+    "frontend/src/pages/Register.tsx",
+    "frontend/src/pages/SearchInternships.tsx",
+    "frontend/src/pages/StudentDashboard.tsx",
+    "frontend/src/utils/fileHelpers.ts",
+    "frontend/src/utils/seedData.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

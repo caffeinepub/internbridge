@@ -1,0 +1,277 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-build-a-fully-responsive-single-page-react-application-called-internbridge-with-state-based-navigation-no-router-library-use-a-global-authcontext-to-manage-the-currently-logged-in-user-role-student-recruiter-admin-persist-auth-state-in-localstorage-under-the-key-internbridge-currentuser-apply-a-consistent-blue-to-indigo-gradient-color-scheme-with-tailwind-css-throughout",
+      "featureTitle": "Build a fully responsive single-page React application called 'InternBridge' with state-based navigation (no router library). Use a global AuthContext to manage the currently logged-in user (role: student | recruiter | admin). Persist auth state in localStorage under the key `internbridge_currentUser`. Apply a consistent blue-to-indigo gradient color scheme with Tailwind CSS throughout.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/contexts/AuthContext.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-a-responsive-navbar-with-links-home-login-register-on-mobile-collapse-links-behind-a-hamburger-menu-when-a-user-is-logged-in-show-their-name-role-and-a-logout-button-that-clears-internbridge-currentuser-and-redirects-to-the-home-page",
+      "featureTitle": "Implement a responsive Navbar with links: Home, Login, Register. On mobile, collapse links behind a hamburger menu. When a user is logged in, show their name/role and a Logout button that clears `internbridge_currentUser` and redirects to the Home page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Navbar.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-home-page-with-1-a-hero-section-containing-the-tagline-bridge-the-gap-between-skills-and-opportunities-and-two-cta-buttons-find-internships-navigates-to-search-page-and-hire-talent-navigates-to-register-as-recruiter-2-a-features-section-highlighting-platform-benefits-skill-verification-smart-matching-easy-applications-admin-oversight-styled-with-the-blue-to-indigo-gradient-hero-background",
+      "featureTitle": "Build the Home page with: (1) a hero section containing the tagline 'Bridge the Gap Between Skills and Opportunities' and two CTA buttons — 'Find Internships' (navigates to Search page) and 'Hire Talent' (navigates to Register as Recruiter); (2) a Features section highlighting platform benefits (skill verification, smart matching, easy applications, admin oversight); styled with the blue-to-indigo gradient hero background.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Home.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-login-page-with-two-tabs-student-recruiter-login-email-password-fields-checks-localstorage-internbridge-students-and-internbridge-recruiters-for-a-matching-user-and-admin-login-username-password-hardcoded-credentials-admin-admin-on-successful-login-write-to-internbridge-currentuser-and-redirect-to-the-appropriate-dashboard-based-on-role-show-inline-error-messages-for-invalid-credentials",
+      "featureTitle": "Build the Login page with two tabs: 'Student / Recruiter Login' (email + password fields, checks localStorage `internbridge_students` and `internbridge_recruiters` for a matching user) and 'Admin Login' (username + password, hardcoded credentials admin/admin). On successful login, write to `internbridge_currentUser` and redirect to the appropriate dashboard based on role. Show inline error messages for invalid credentials.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Login.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-register-page-with-two-tabs-student-and-recruiter-student-fields-name-dob-date-gender-radio-male-female-other-email-mobile-password-id-proof-select-aadhar-pan-voter-id-skills-checkboxes-excel-power-bi-sql-python-photo-file-base64-resume-file-base64-on-submit-append-to-internbridge-students-array-in-localstorage-with-verified-false-verificationstatus-pending-assessments-certificates-recruiter-fields-name-email-phone-password-company-name-owner-name-owner-id-proof-select-din-number-cin-number-address-textarea-on-submit-append-to-internbridge-recruiters-with-verified-false-verificationstatus-pending-both-forms-validate-required-fields-and-show-inline-errors-after-registration-redirect-to-the-login-page",
+      "featureTitle": "Build the Register page with two tabs: Student and Recruiter. Student fields: Name, DOB (date), Gender (radio: Male/Female/Other), Email, Mobile, Password, ID Proof (select: Aadhar/PAN/Voter ID), Skills (checkboxes: EXCEL, Power BI, SQL, Python), Photo (file → base64), Resume (file → base64). On submit, append to `internbridge_students` array in localStorage with `verified: false, verificationStatus: 'pending', assessments: [], certificates: []`. Recruiter fields: Name, Email, Phone, Password, Company Name, Owner Name, Owner ID Proof (select), DIN Number, CIN Number, Address (textarea). On submit, append to `internbridge_recruiters` with `verified: false, verificationStatus: 'pending'`. Both forms validate required fields and show inline errors. After registration, redirect to the login page.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Register.tsx",
+        "frontend/src/utils/fileHelpers.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-student-dashboard-as-a-protected-route-redirect-to-login-if-not-authenticated-as-student-implement-sidebar-navigation-collapses-to-tabs-on-mobile-with-these-sections-1-profile-display-all-stored-profile-fields-photo-and-an-edit-button-to-update-name-mobile-skills-2-skills-list-skills-with-a-badge-yellow-unverified-or-green-verified-based-on-verificationstatus-3-documents-show-resume-filename-id-proof-and-a-certificate-upload-file-base64-appended-to-certificates-4-skill-assessment-button-link-to-navigate-to-the-assessment-page-5-search-internships-button-link-to-navigate-to-the-search-page-6-my-applications-list-of-the-student-s-applications-fetched-from-internbridge-applications-with-status-badges",
+      "featureTitle": "Build the Student Dashboard as a protected route (redirect to Login if not authenticated as student). Implement sidebar navigation (collapses to tabs on mobile) with these sections: (1) Profile – display all stored profile fields, photo, and an Edit button to update name/mobile/skills; (2) Skills – list skills with a badge: yellow ⚠ Unverified or green ✓ Verified based on `verificationStatus`; (3) Documents – show resume filename, ID proof, and a certificate upload (file → base64 appended to `certificates[]`); (4) Skill Assessment – button/link to navigate to the Assessment page; (5) Search Internships – button/link to navigate to the Search page; (6) My Applications – list of the student's applications fetched from `internbridge_applications` with status badges.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/StudentDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-recruiter-dashboard-as-a-protected-route-redirect-to-login-if-not-authenticated-as-recruiter-sidebar-navigation-with-sections-1-company-profile-display-stored-company-info-2-verification-status-show-verified-employer-badge-gold-green-if-verified-true-else-pending-verification-badge-3-post-internship-form-with-company-name-auto-filled-designation-duration-stipend-work-type-select-offline-online-hybrid-skills-required-checkboxes-description-saves-new-entry-to-internbridge-internships-in-localstorage-4-my-internship-postings-list-of-internships-posted-by-this-recruiter-5-view-applicants-application-management-for-each-internship-list-applicants-from-internbridge-applications-and-allow-changing-status-through-applied-under-review-accepted-rejected-via-a-dropdown-or-buttons",
+      "featureTitle": "Build the Recruiter Dashboard as a protected route (redirect to Login if not authenticated as recruiter). Sidebar navigation with sections: (1) Company Profile – display stored company info; (2) Verification Status – show 'Verified Employer' badge (gold/green) if `verified: true`, else 'Pending Verification' badge; (3) Post Internship – form with Company Name (auto-filled), Designation, Duration, Stipend, Work Type (select: Offline/Online/Hybrid), Skills Required (checkboxes), Description; saves new entry to `internbridge_internships` in localStorage; (4) My Internship Postings – list of internships posted by this recruiter; (5) View Applicants / Application Management – for each internship, list applicants from `internbridge_applications` and allow changing status through Applied → Under Review → Accepted/Rejected via a dropdown or buttons.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/RecruiterDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-admin-dashboard-as-a-protected-route-redirect-to-login-if-not-authenticated-as-admin-implement-three-tabs-1-students-table-with-name-email-skills-verification-status-and-action-buttons-verify-sets-verified-true-verificationstatus-verified-reject-sets-verificationstatus-rejected-request-more-info-sets-verificationstatus-more-info-2-recruiters-table-with-company-name-name-email-verification-status-and-same-action-buttons-3-documents-list-all-uploaded-documents-photos-resumes-certificates-from-students-and-recruiters-with-document-status-pending-approved-rejected-need-more-info-and-action-buttons-to-change-each-document-s-status-all-state-changes-persist-to-localstorage-immediately",
+      "featureTitle": "Build the Admin Dashboard as a protected route (redirect to Login if not authenticated as admin). Implement three tabs: (1) Students – table with Name, Email, Skills, Verification Status, and action buttons: Verify (sets verified:true, verificationStatus:'verified'), Reject (sets verificationStatus:'rejected'), Request More Info (sets verificationStatus:'more_info'); (2) Recruiters – table with Company Name, Name, Email, Verification Status and same action buttons; (3) Documents – list all uploaded documents (photos, resumes, certificates) from students and recruiters with document status (Pending/Approved/Rejected/Need More Info) and action buttons to change each document's status. All state changes persist to localStorage immediately.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/AdminDashboard.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-search-internships-page-accessible-to-all-but-apply-button-only-shown-to-logged-in-students-display-all-internships-from-internbridge-internships-include-a-search-bar-that-filters-in-real-time-by-designation-company-name-skills-and-description-each-internship-card-shows-company-name-designation-duration-stipend-work-type-badge-skills-tags-and-an-apply-button-on-apply-create-a-new-record-in-internbridge-applications-id-internshipid-studentid-studentname-companyname-designation-applieddate-status-applied-show-a-toast-confirmation-after-applying-and-prevent-duplicate-applications",
+      "featureTitle": "Build the Search Internships page (accessible to all, but Apply button only shown to logged-in students). Display all internships from `internbridge_internships`. Include a search bar that filters in real-time by designation, company name, skills, and description. Each internship card shows: Company Name, Designation, Duration, Stipend, Work Type badge, Skills tags, and an Apply button. On Apply, create a new record in `internbridge_applications`: { id, internshipId, studentId, studentName, companyName, designation, appliedDate, status: 'applied' }. Show a toast/confirmation after applying and prevent duplicate applications.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/SearchInternships.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-assessment-page-display-a-skill-selector-excel-sql-power-bi-python-for-the-selected-skill-show-5-hardcoded-multiple-choice-questions-on-submit-calculate-the-score-x-5-save-the-assessment-result-to-the-current-student-s-assessments-array-in-internbridge-students-localstorage-format-testname-score-date-and-display-the-result-with-test-name-score-and-date-taken-allow-retaking-the-assessment",
+      "featureTitle": "Build the Assessment page. Display a skill selector (Excel, SQL, Power BI, Python). For the selected skill, show 5 hardcoded multiple-choice questions. On submit, calculate the score (X/5), save the assessment result to the current student's `assessments` array in `internbridge_students` localStorage (format: { testName, score, date }), and display the result with Test Name, Score, and Date Taken. Allow retaking the assessment.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/data/assessmentQuestions.ts",
+        "frontend/src/pages/Assessment.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-the-applications-page-for-logged-in-students-display-all-their-applications-from-internbridge-applications-showing-internship-title-company-name-applied-date-and-a-colored-status-badge-applied-blue-under-review-yellow-accepted-green-rejected-red-for-logged-in-recruiters-show-the-same-application-management-view-as-in-the-recruiter-dashboard-list-applicants-per-internship-with-status-change-controls",
+      "featureTitle": "Build the Applications page. For logged-in students, display all their applications from `internbridge_applications` showing: Internship Title, Company Name, Applied Date, and a colored status badge (Applied – blue, Under Review – yellow, Accepted – green, Rejected – red). For logged-in recruiters, show the same application management view as in the Recruiter Dashboard (list applicants per internship with status change controls).",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/pages/Applications.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-on-first-load-when-localstorage-keys-are-absent-seed-the-following-data-2-sample-students-one-with-verificationstatus-verified-one-pending-2-sample-recruiters-one-verified-one-pending-3-sample-internships-linked-to-the-verified-recruiter-and-at-least-2-sample-applications-data-must-conform-to-the-defined-data-models",
+      "featureTitle": "On first load (when localStorage keys are absent), seed the following data: 2 sample students (one with verificationStatus:'verified', one 'pending'), 2 sample recruiters (one verified, one pending), 3 sample internships linked to the verified recruiter, and at least 2 sample applications. Data must conform to the defined data models.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/utils/seedData.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-reusable-ui-components-1-badge-renders-verified-green-pending-yellow-rejected-red-more-info-blue-variants-2-statuspill-for-application-statuses-with-the-specified-colors-3-toast-notification-that-appears-at-bottom-right-for-actions-like-apply-save-verify-reject-4-confirmation-modal-for-destructive-actions-5-internshipcard-for-the-search-page-apply-mobile-first-tailwind-css-and-ensure-cards-stack-vertically-on-mobile-and-form-a-grid-on-desktop",
+      "featureTitle": "Implement reusable UI components: (1) Badge – renders Verified ✓ (green), Pending ⏳ (yellow), Rejected ✗ (red), More Info (blue) variants; (2) StatusPill – for application statuses with the specified colors; (3) Toast notification that appears at bottom-right for actions like Apply, Save, Verify, Reject; (4) Confirmation Modal for destructive actions; (5) InternshipCard for the Search page. Apply mobile-first Tailwind CSS and ensure cards stack vertically on mobile and form a grid on desktop.",
+      "files": [
+        "frontend/src/components/ConfirmationModal.tsx",
+        "frontend/src/components/InternshipCard.tsx",
+        "frontend/src/components/StatusPill.tsx",
+        "frontend/src/components/Toast.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-13"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-polished-professional-visual-theme-blue-3b82f6-to-indigo-6366f1-gradient-for-hero-and-primary-actions-light-gray-f9fafb-backgrounds-for-dashboard-content-areas-success-green-10b981-for-verified-states-warning-yellow-f59e0b-for-pending-states-danger-red-ef4444-for-rejected-states-use-clean-typography-with-clear-hierarchy-large-headings-in-hero-medium-in-section-titles-small-in-card-metadata-ensure-the-overall-layout-feels-modern-and-trustworthy-appropriate-for-a-professional-internship-platform",
+      "featureTitle": "Apply a polished, professional visual theme: blue (#3B82F6) to indigo (#6366F1) gradient for hero and primary actions; light gray (#F9FAFB) backgrounds for dashboard content areas; success green (#10B981) for verified states; warning yellow (#F59E0B) for pending states; danger red (#EF4444) for rejected states. Use clean typography with clear hierarchy (large headings in hero, medium in section titles, small in card metadata). Ensure the overall layout feels modern and trustworthy, appropriate for a professional internship platform.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-14"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

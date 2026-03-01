@@ -1,0 +1,9 @@
+{
+  "frontend/src/App.tsx": "Main application entry point that wraps the app with AuthProvider and ToastProvider, seeds localStorage on mount, and implements state-based page routing rendering all 9 pages based on the currentPage state.",
+  "frontend/src/pages/StudentDashboard.tsx": "Protected student dashboard with sidebar/mobile-tab navigation across Profile, Skills, Documents, Assessment, Search, and Applications sections; fixes the cert.status type mismatch by mapping 'approved' to 'verified' via a helper function before passing to VerificationBadge.",
+  "frontend/src/pages/RecruiterDashboard.tsx": "Protected recruiter dashboard with sidebar navigation for Company Profile, Verification Status, Post Internship form, My Postings list, and Application Management with status change controls persisted to localStorage.",
+  "frontend/src/pages/AdminDashboard.tsx": "Protected admin-only dashboard with three tabs (Students, Recruiters, Documents) showing verification action buttons (Verify/Reject/More Info) and document status controls, all persisting changes to localStorage immediately.",
+  "frontend/src/pages/SearchInternships.tsx": "Public internship search page with a gradient header, real-time text filtering and work-type filter buttons, internship cards grid, and Apply functionality for logged-in students with duplicate prevention.",
+  "frontend/src/pages/Assessment.tsx": "Three-phase skill assessment page (select skill → answer 5 MCQs → view results) that saves scores to the student's assessments array in localStorage and shows an answer review after submission.",
+  "frontend/src/pages/Applications.tsx": "Role-aware applications page showing a student's application list with colored status badges, or a recruiter's grouped application management view with inline status dropdowns persisted to localStorage."
+}

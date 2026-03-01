@@ -1,0 +1,365 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "InternBridge – Skill-Based Internship Platform (Full SPA)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Build responsive SPA with state-based navigation, AuthContext for user management, localStorage auth persistence, and blue-to-indigo gradient theme",
+      "acceptanceCriteria": [
+        "A single React app renders all pages via useState-controlled page routing.",
+        "AuthContext is accessible to all components and reflects the current user role.",
+        "Refreshing the page restores the logged-in user from localStorage.",
+        "Blue (#3B82F6) to Indigo (#6366F1) gradient is used as the primary color theme."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/contexts/AuthContext.tsx",
+          "operation": "create",
+          "description": "Create AuthContext with currentUser state (role: student | recruiter | admin | null), login/logout methods, and localStorage persistence under key 'internbridge_currentUser'. Provide AuthProvider component."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap app with AuthProvider and implement state-based page routing using useState to track currentPage. Render components conditionally based on currentPage state (Home, Login, Register, StudentDashboard, RecruiterDashboard, AdminDashboard, Search, Assessment, Applications)."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add custom CSS variables for the blue-to-indigo gradient theme (--color-primary-blue: #3B82F6, --color-primary-indigo: #6366F1) and utility classes for gradient backgrounds."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Extend Tailwind config with custom colors (primaryBlue: #3B82F6, primaryIndigo: #6366F1, success: #10B981, warning: #F59E0B, danger: #EF4444, bgLight: #F9FAFB) and gradient utilities."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement responsive Navbar with mobile hamburger menu, conditional user display, and logout functionality",
+      "acceptanceCriteria": [
+        "Navbar renders on all pages.",
+        "Hamburger icon appears on screens narrower than md breakpoint and toggles the nav links.",
+        "Logged-in user's name and role are displayed.",
+        "Logout clears auth state and returns user to Home."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Navbar.tsx",
+          "operation": "create",
+          "description": "Create responsive Navbar component with links (Home, Login, Register), mobile hamburger menu toggling via useState, user name/role display when authenticated, and Logout button that calls AuthContext logout and navigates to Home. Wire the generated logo image at frontend/public/assets/generated/logo-icon.dim_128x128.png."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and render Navbar component above page content, passing setCurrentPage navigation function as prop."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build Home page with hero section (tagline, CTA buttons, gradient background) and Features section highlighting platform benefits",
+      "acceptanceCriteria": [
+        "Hero section displays the exact tagline and both CTA buttons.",
+        "'Find Internships' navigates to the Search Internships page.",
+        "'Hire Talent' navigates to the Register page pre-selected on the Recruiter tab.",
+        "Features section shows at least 4 benefit cards.",
+        "Hero background uses the blue-to-indigo gradient."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Home.tsx",
+          "operation": "create",
+          "description": "Create Home page with hero section (tagline 'Bridge the Gap Between Skills and Opportunities', CTA buttons 'Find Internships' and 'Hire Talent' navigating to Search and Register pages respectively, blue-to-indigo gradient background using the generated hero image at frontend/public/assets/generated/hero-bg.dim_1440x600.png) and Features section with 4+ benefit cards (skill verification, smart matching, easy applications, admin oversight)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add Home page route to state-based navigation, rendering Home component when currentPage is 'home'."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Build Login page with Student/Recruiter and Admin tabs, localStorage authentication, role-based redirects, and error handling",
+      "acceptanceCriteria": [
+        "Two tabs switch between Student/Recruiter login and Admin login forms.",
+        "Successful student login saves currentUser with role 'student' and redirects to /student-dashboard.",
+        "Successful recruiter login saves currentUser with role 'recruiter' and redirects to /recruiter-dashboard.",
+        "Admin login with admin/admin saves currentUser with role 'admin' and redirects to /admin-dashboard.",
+        "Wrong credentials display a visible error message without page reload."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Login.tsx",
+          "operation": "create",
+          "description": "Create Login page with two tabs: (1) Student/Recruiter login form (email + password, checks localStorage 'internbridge_students' and 'internbridge_recruiters'); (2) Admin login form (username + password, hardcoded admin/admin). On success, call AuthContext login with user data and navigate to appropriate dashboard. Display inline error messages for invalid credentials."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add Login page route to state-based navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Build Register page with Student and Recruiter tabs, comprehensive form fields, file-to-base64 conversion, localStorage storage with initial verification status, validation, and post-registration redirect",
+      "acceptanceCriteria": [
+        "Student and Recruiter registration tabs are independently functional.",
+        "All listed fields are present with correct input types.",
+        "Photo and Resume files are converted to base64 before storage.",
+        "Validation prevents submission with missing required fields.",
+        "New student record includes verified: false, verificationStatus: 'pending', assessments: [], certificates: [].",
+        "New recruiter record includes verified: false, verificationStatus: 'pending'.",
+        "Redirect to Login page after successful registration."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Register.tsx",
+          "operation": "create",
+          "description": "Create Register page with Student and Recruiter tabs. Student form: Name, DOB (date), Gender (radio), Email, Mobile, Password, ID Proof (select), Skills (checkboxes: EXCEL, Power BI, SQL, Python), Photo (file→base64), Resume (file→base64). On submit, append to localStorage 'internbridge_students' with {verified: false, verificationStatus: 'pending', assessments: [], certificates: []}. Recruiter form: Name, Email, Phone, Password, Company Name, Owner Name, Owner ID Proof (select), DIN Number, CIN Number, Address (textarea). On submit, append to 'internbridge_recruiters' with {verified: false, verificationStatus: 'pending'}. Include validation and redirect to Login after registration."
+        },
+        {
+          "path": "frontend/src/utils/fileHelpers.ts",
+          "operation": "create",
+          "description": "Create utility functions for converting File objects to base64 strings for localStorage storage."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add Register page route to state-based navigation, supporting optional recruiterTab query parameter to pre-select Recruiter tab when navigating from Home 'Hire Talent' CTA."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Build Student Dashboard with protected route, responsive sidebar navigation, Profile/Skills/Documents/Assessment/Search/Applications sections, and certificate upload",
+      "acceptanceCriteria": [
+        "Unauthenticated access redirects to Login.",
+        "Sidebar renders on desktop; collapses to tab bar on mobile.",
+        "Profile section shows photo and all student fields with working Edit mode.",
+        "Skills section shows correct badge per verification status.",
+        "Certificate upload converts file to base64 and appends to student's certificates array in localStorage.",
+        "My Applications shows all applications for the current student with colored status badges."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/StudentDashboard.tsx",
+          "operation": "create",
+          "description": "Create StudentDashboard as protected route (redirect to Login if not role='student'). Implement responsive sidebar navigation (desktop sidebar, mobile tabs) with sections: (1) Profile - display/edit name/mobile/skills, show photo; (2) Skills - list with verification badge (yellow unverified, green verified); (3) Documents - show resume, ID proof, certificate upload (file→base64→append to certificates[]); (4) Skill Assessment - button to navigate to Assessment page; (5) Search Internships - button to navigate to Search page; (6) My Applications - list student's applications from 'internbridge_applications' with status badges."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add StudentDashboard route with authentication guard checking AuthContext currentUser role."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build Recruiter Dashboard with protected route, sidebar navigation, Company Profile/Verification Status/Post Internship/My Postings/Application Management sections",
+      "acceptanceCriteria": [
+        "Unauthenticated access redirects to Login.",
+        "Post Internship form saves correctly to localStorage with recruiterId and postedDate.",
+        "My Internship Postings lists only this recruiter's internships.",
+        "Application Management lists applicants per internship with current status.",
+        "Status changes persist immediately to localStorage."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/RecruiterDashboard.tsx",
+          "operation": "create",
+          "description": "Create RecruiterDashboard as protected route (redirect to Login if not role='recruiter'). Sidebar navigation with sections: (1) Company Profile - display company info; (2) Verification Status - badge (gold/green if verified, else pending); (3) Post Internship - form (Company Name auto-filled, Designation, Duration, Stipend, Work Type select, Skills Required checkboxes, Description), saves to 'internbridge_internships'; (4) My Internship Postings - list recruiter's internships; (5) Application Management - list applicants per internship with status dropdown (Applied→Under Review→Accepted/Rejected), persist changes to 'internbridge_applications'."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add RecruiterDashboard route with authentication guard checking AuthContext currentUser role."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Build Admin Dashboard with protected route, Students/Recruiters/Documents tabs, verification action buttons, and immediate localStorage persistence",
+      "acceptanceCriteria": [
+        "Admin-only access; other roles are redirected.",
+        "Students tab shows all students with correct current verification status.",
+        "Verify/Reject/Request More Info buttons update the student/recruiter record in localStorage.",
+        "Recruiters tab mirrors Student tab functionality for recruiter records.",
+        "Documents tab lists all file uploads with status controls."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "create",
+          "description": "Create AdminDashboard as protected route (redirect to Login if not role='admin'). Three tabs: (1) Students - table with Name, Email, Skills, Verification Status, action buttons (Verify sets verified:true/verificationStatus:'verified', Reject sets verificationStatus:'rejected', Request More Info sets verificationStatus:'more_info'); (2) Recruiters - table with Company Name, Name, Email, Verification Status, same action buttons; (3) Documents - list all uploaded documents (photos, resumes, certificates) with status (Pending/Approved/Rejected/Need More Info) and action buttons. All changes persist to localStorage immediately."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add AdminDashboard route with authentication guard checking AuthContext currentUser role."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Build Search Internships page with real-time filtering, Apply button for authenticated students, duplicate prevention, and Work Type/skill badge rendering",
+      "acceptanceCriteria": [
+        "All internships from localStorage are displayed by default.",
+        "Search bar filters cards in real-time across designation, company, skills, and description fields.",
+        "Apply button is visible only to authenticated students.",
+        "Applying creates a correct record in 'internbridge_applications'.",
+        "Duplicate application attempts show an error or are blocked.",
+        "Work Type and skill tags render as styled badges/pills."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/SearchInternships.tsx",
+          "operation": "create",
+          "description": "Create SearchInternships page accessible to all. Display all internships from 'internbridge_internships'. Include search bar filtering in real-time by designation, company name, skills, description. Each InternshipCard shows Company Name, Designation, Duration, Stipend, Work Type badge, Skills tags, Apply button (only for logged-in students). On Apply, create record in 'internbridge_applications' {id, internshipId, studentId, studentName, companyName, designation, appliedDate, status:'applied'}, show toast confirmation, prevent duplicate applications."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add SearchInternships page route to state-based navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Build Assessment page with skill selector, 5 hardcoded MCQs per skill, score calculation, result persistence to student's assessments array, and retake capability",
+      "acceptanceCriteria": [
+        "Each of the 4 skills (Excel, SQL, Power BI, Python) has exactly 5 distinct MCQ questions.",
+        "Score is calculated correctly out of 5.",
+        "Result is saved to the logged-in student's assessments array in localStorage.",
+        "Result summary (test name, score, date) is displayed after submission.",
+        "User can retake a different or same assessment."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Assessment.tsx",
+          "operation": "create",
+          "description": "Create Assessment page with skill selector (Excel, SQL, Power BI, Python). For selected skill, display 5 hardcoded MCQ questions. On submit, calculate score (X/5), save to current student's assessments array in 'internbridge_students' localStorage {testName, score, date}, display result summary. Allow retaking assessments."
+        },
+        {
+          "path": "frontend/src/data/assessmentQuestions.ts",
+          "operation": "create",
+          "description": "Create hardcoded assessment questions data structure with 5 MCQ questions each for Excel, SQL, Power BI, and Python skills, including correct answers."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add Assessment page route to state-based navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build Applications page with role-based views: student application list with colored status badges, recruiter application management with status controls",
+      "acceptanceCriteria": [
+        "Student view lists only the current student's applications.",
+        "Status badges use the correct specified colors.",
+        "Recruiter view groups applications by internship with status update controls.",
+        "Status changes by recruiter persist to localStorage."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Applications.tsx",
+          "operation": "create",
+          "description": "Create Applications page with role-based rendering: For students, display all their applications from 'internbridge_applications' showing Internship Title, Company Name, Applied Date, colored status badge (Applied-blue, Under Review-yellow, Accepted-green, Rejected-red). For recruiters, show application management view (list applicants per internship with status change controls, same as Recruiter Dashboard Application Management section)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add Applications page route to state-based navigation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Seed localStorage with sample students, recruiters, internships, and applications on first load when keys are absent",
+      "acceptanceCriteria": [
+        "On first load with empty localStorage, all four keys are populated with seed data.",
+        "Seed is not re-applied if keys already exist.",
+        "Seed students include one with verified:true/verificationStatus:'verified' and one with verificationStatus:'pending'.",
+        "Seed internships are linked to the verified recruiter's id.",
+        "Sample applications reference valid seed student and internship ids."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/utils/seedData.ts",
+          "operation": "create",
+          "description": "Create seed data utility that checks if localStorage keys ('internbridge_students', 'internbridge_recruiters', 'internbridge_internships', 'internbridge_applications') are absent. If absent, populate with: 2 sample students (one verified, one pending), 2 sample recruiters (one verified, one pending), 3 sample internships linked to verified recruiter, 2+ sample applications with valid references."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Import and invoke seedData utility in useEffect on component mount to ensure first-load seeding."
+        }
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "summary": "Implement reusable UI components: Badge, StatusPill, Toast, Confirmation Modal, InternshipCard with mobile-first responsive design",
+      "acceptanceCriteria": [
+        "Badge component renders the correct icon, text, and color for each variant.",
+        "StatusPill applies the four specified application status colors.",
+        "Toast appears and auto-dismisses after ~3 seconds.",
+        "Confirmation Modal is reusable and accepts a message and onConfirm callback.",
+        "InternshipCard is responsive: single column on mobile, grid on md+ screens."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/Badge.tsx",
+          "operation": "create",
+          "description": "Create Badge component rendering variants: Verified ✓ (green #10B981), Pending ⏳ (yellow #F59E0B), Rejected ✗ (red #EF4444), More Info (blue #3B82F6) with appropriate icons, text, and Tailwind styling."
+        },
+        {
+          "path": "frontend/src/components/StatusPill.tsx",
+          "operation": "create",
+          "description": "Create StatusPill component for application statuses: Applied (blue #3B82F6), Under Review (yellow #F59E0B), Accepted (green #10B981), Rejected (red #EF4444)."
+        },
+        {
+          "path": "frontend/src/components/Toast.tsx",
+          "operation": "create",
+          "description": "Create Toast notification component that appears at bottom-right, displays a message, and auto-dismisses after ~3 seconds. Include useToast hook for global toast management."
+        },
+        {
+          "path": "frontend/src/components/ConfirmationModal.tsx",
+          "operation": "create",
+          "description": "Create reusable ConfirmationModal component accepting message prop and onConfirm callback for destructive actions."
+        },
+        {
+          "path": "frontend/src/components/InternshipCard.tsx",
+          "operation": "create",
+          "description": "Create InternshipCard component for Search page displaying Company Name, Designation, Duration, Stipend, Work Type badge, Skills tags, Apply button. Mobile-first responsive: stack vertically on mobile, grid layout on md+ screens."
+        }
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "summary": "Apply polished professional visual theme with specified color palette, typography hierarchy, and modern trustworthy layout",
+      "acceptanceCriteria": [
+        "Hero section has a blue-to-indigo gradient background.",
+        "Dashboard backgrounds use #F9FAFB.",
+        "All verified badges are green, pending are yellow, rejected are red.",
+        "Typography hierarchy is visually clear on all screen sizes.",
+        "Overall design looks professional and consistent across all pages."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Enhance global styles with blue-to-indigo gradient utilities, typography hierarchy (large headings for hero, medium for section titles, small for card metadata), and light gray (#F9FAFB) background classes for dashboard content areas."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Ensure Tailwind config includes all theme colors (primaryBlue #3B82F6, primaryIndigo #6366F1, success #10B981, warning #F59E0B, danger #EF4444, bgLight #F9FAFB) and responsive breakpoints for mobile-first design."
+        }
+      ]
+    }
+  ]
+}
